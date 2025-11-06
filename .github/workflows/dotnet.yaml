@@ -6,9 +6,18 @@ on:
       - develop
 jobs:
   dotnet_publish:
-       runs-on: 'self-hosted'
+       runs-on: 'ubuntu-latest'
        steps:
          - name: code chekout
            uses: actions/checkout@v5 
-         - name: this is my dotnet publish command
+         - name: SonarCloud Scan 
+           uses: sonarsource/sonarcloud-github-action@v6
+           with: 
+             mysonar: ${{ secrets.SONAR_TOKEN }}
+             mysonar_url: ${{ secrets.SONAR_HOST_URL }}   
+         - name: install  dotnet
+           uses: actions/setup-dotnet@v4
+           with:
+             dotnet-version: "9.0.100"
+         - name: dotnet publish    
            run: dotnet publish -c Release src/Presentation/Nop.Web/Nop.Web.csproj -o demo
