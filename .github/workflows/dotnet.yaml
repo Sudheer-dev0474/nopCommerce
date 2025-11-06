@@ -11,7 +11,7 @@ jobs:
          - name: code chekout
            uses: actions/checkout@v5 
          - name: SonarCloud Scan 
-           uses: sonarsource/sonarcloud-github-action@v6
+           uses: sonarsource/sonarcloud-github-action@v5
            with: 
              mysonar: ${{ secrets.SONAR_TOKEN }}
              mysonar_url: ${{ secrets.SONAR_HOST_URL }}   
